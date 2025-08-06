@@ -1,0 +1,584 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-satoshi font-normal text-base text-body bg-whiten relative z-1;
+  }
+
+  /* --------------------------------- */
+  /* light theme */
+  /* --------------------------------- */
+  :root {
+    --background: 255 255 255;
+    /* #ffffff */
+    --foreground: 27 30 39;
+    /* #1b1e27 */
+    --muted: 234 237 241;
+    /* #eaedf1 */
+    --muted-foreground: 130 136 155;
+    /* #b1b9c9 */
+
+    /*
+    * primary colors
+    */
+    --primary-lighter: 234 237 241;
+    /* #eaedf1 */
+    --primary-default: 27 30 39;
+    /* #1b1e27 */
+    --primary-dark: 0 0 0;
+    /* #000000 */
+    --primary-foreground: 255 255 255;
+    /* #ffffff */
+
+    /*
+    * secondary colors
+    */
+    --secondary-lighter: 221 227 255;
+    /* #dde3ff */
+    --secondary-default: 78 54 245;
+    /* #4e36f5 */
+    --secondary-dark: 67 42 216;
+    /* #432ad8 */
+    --secondary-foreground: 255 255 255;
+    /* #ffffff */
+
+    /*
+    * danger colors
+    */
+    --red-lighter: 247 212 214;
+    /* #f7d4d6 */
+    --red-default: 238 0 0;
+    /* #e00 */
+    --red-dark: 197 0 0;
+    /* #c50000 */
+
+    /*
+    * warning colors
+    */
+    --orange-lighter: 255 239 207;
+    /* #ffefcf */
+    --orange-default: 245 166 35;
+    /* #f5a623 */
+    --orange-dark: 171 87 10;
+    /* #ab570a */
+
+    /*
+    * info colors
+    */
+    --blue-lighter: 211 229 255;
+    /* #d3e5ff */
+    --blue-default: 0 112 243;
+    /* #0070f3 */
+    --blue-dark: 7 97 209;
+    /* #0761d1 */
+
+    /*
+    * success colors
+    */
+    --green-lighter: 185 249 207;
+    /* #b9f9cf */
+    --green-default: 17 168 73;
+    /* #11a849 */
+    --green-dark: 17 132 60;
+    /* #11843c */
+  }
+
+  /* --------------------------------- */
+  /* dark theme */
+  /* --------------------------------- */
+  [data-theme='dark'] {
+    --background: 17 19 24;
+    /* #111318 */
+    --foreground: 234 237 241;
+    /* #eaedf1 */
+    --muted: 59 64 79;
+    /* #3b404f */
+    --muted-foreground: 93 98 116;
+    /* #5d6274 */
+
+    /*
+    * primary colors
+    */
+    --primary-lighter: 27 30 39;
+    /* #1b1e27 */
+    --primary-default: 234 237 241;
+    /* #eaedf1 */
+    --primary-dark: 246 247 249;
+    /* #f6f7f9 */
+    --primary-foreground: 21 23 30;
+    /* #15171e */
+
+    /*
+    * secondary colors
+    */
+    --secondary-lighter: 31 22 90;
+    /* #1f165a */
+    --secondary-dark: 193 203 255;
+    /* #c1cbff */
+
+    /*
+    * danger colors
+    */
+    --red-lighter: 204 29 43;
+    /* #500000 */
+    --red-dark: 252 242 243;
+    /* #fcf2f3 */
+
+    /*
+    * warning colors
+    */
+    --orange-lighter: 68 29 4;
+    /* #441d04 */
+    --orange-dark: 252 234 139;
+    /* #fcea8b */
+
+    /*
+    * info colors
+    */
+    --blue-lighter: 13 51 94;
+    /* #0d335e */
+    --blue-dark: 181 233 255;
+    /* #b5e9ff */
+
+    /*
+    * success colors
+    */
+    --green-lighter: 3 48 22;
+    /* #033016 */
+    --green-dark: 185 249 207;
+    /* #b9f9cf */
+
+    /* here you can customize other colors for dark theme if design required */
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .chat-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+  .inbox-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+}
+
+/* third-party libraries CSS */
+
+.tableCheckbox:checked ~ div span {
+  @apply opacity-100;
+}
+.tableCheckbox:checked ~ div {
+  @apply bg-primary border-primary;
+}
+
+.apexcharts-legend-text {
+  @apply !text-body dark:!text-bodydark;
+}
+.apexcharts-text {
+  @apply !fill-body dark:!fill-bodydark;
+}
+.apexcharts-xcrosshairs {
+  @apply !fill-stroke dark:!fill-strokedark;
+}
+.apexcharts-gridline {
+  @apply !stroke-stroke dark:!stroke-strokedark;
+}
+.apexcharts-series.apexcharts-pie-series path {
+  @apply dark:!stroke-transparent;
+}
+.apexcharts-legend-series {
+  @apply !inline-flex gap-1.5;
+}
+.apexcharts-tooltip.apexcharts-theme-light {
+  @apply dark:!border-strokedark dark:!bg-boxdark;
+}
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  @apply dark:!border-strokedark dark:!bg-meta-4;
+}
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+  @apply dark:!border-meta-4 dark:!bg-meta-4 dark:!text-bodydark1;
+}
+.apexcharts-xaxistooltip-bottom:after {
+  @apply !border-b-[#EFF4FB] dark:!border-b-meta-4;
+}
+.apexcharts-xaxistooltip-bottom:before {
+  @apply !border-b-[#EFF4FB] dark:!border-b-meta-4;
+}
+.apexcharts-xaxistooltip-bottom {
+  @apply !rounded !border-none !bg-[#EFF4FB] !text-xs !font-medium !text-black dark:!text-white;
+}
+.apexcharts-tooltip-series-group {
+  @apply !pl-1.5;
+}
+
+.map-btn .jvm-zoom-btn {
+  @apply flex items-center justify-center w-7.5 h-7.5 rounded border border-stroke dark:border-strokedark hover:border-primary dark:hover:border-primary bg-white hover:bg-primary text-body hover:text-white dark:text-bodydark dark:hover:text-white text-2xl leading-none px-0 pt-0 pb-0.5;
+}
+.mapOne .jvm-zoom-btn {
+  @apply left-auto top-auto bottom-0;
+}
+.mapOne .jvm-zoom-btn.jvm-zoomin {
+  @apply right-10;
+}
+.mapOne .jvm-zoom-btn.jvm-zoomout {
+  @apply right-0;
+}
+.mapTwo .jvm-zoom-btn {
+  @apply top-auto bottom-0;
+}
+.mapTwo .jvm-zoom-btn.jvm-zoomin {
+  @apply left-0;
+}
+.mapTwo .jvm-zoom-btn.jvm-zoomout {
+  @apply left-10;
+}
+
+.taskCheckbox:checked ~ .box span {
+  @apply opacity-100;
+}
+.taskCheckbox:checked ~ p {
+  @apply line-through;
+}
+.taskCheckbox:checked ~ .box {
+  @apply bg-primary border-primary dark:border-primary;
+}
+
+/* ................................................... */
+/* React Datepicker Styling */
+/* ................................................... */
+.react-datepicker-popper .react-datepicker {
+  @apply bg-white font-satoshi text-gray-600 dark:border-muted dark:bg-gray-50;
+}
+
+/* month container */
+.react-datepicker .react-datepicker__month-container {
+  @apply px-3;
+}
+
+/* time container */
+.react-datepicker .react-datepicker__time-container {
+  @apply w-auto border-l-0 pr-3.5;
+}
+
+.react-datepicker-popper .react-datepicker__time-container .react-datepicker__time {
+  @apply bg-gray-50 dark:bg-gray-200;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
+  @apply dark:bg-muted;
+}
+
+/* header */
+.react-datepicker .react-datepicker__header {
+  @apply border-b-transparent bg-white dark:border-transparent dark:bg-gray-50;
+}
+
+/* current month name in header */
+.react-datepicker .react-datepicker-year-header {
+  @apply dark:text-gray-700;
+}
+
+.react-datepicker .react-datepicker__current-month {
+  @apply mb-3 text-base font-medium dark:text-gray-700;
+}
+
+/* sun-sat day names in header */
+.react-datepicker .react-datepicker__day-names div {
+  @apply m-1.5 text-sm text-gray-700;
+}
+
+/* previous month button */
+.react-datepicker .react-datepicker__navigation--previous {
+  @apply ml-6 rtl:mr-6;
+}
+
+/* next month button */
+.react-datepicker .react-datepicker__navigation--next {
+  @apply mr-6 rtl:ml-6;
+}
+
+/* icon in previous month button */
+.react-datepicker .react-datepicker__navigation-icon--previous {
+  @apply right-0.5;
+}
+
+/* icon in next month button */
+.react-datepicker .react-datepicker__navigation-icon--next {
+  @apply left-0.5;
+}
+
+/* each day */
+.react-datepicker .react-datepicker__day {
+  @apply m-1.5 text-sm leading-7 text-gray-700;
+  @apply hover:rounded-full hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* outside month */
+.react-datepicker .react-datepicker__day--outside-month {
+  @apply text-gray-500;
+}
+
+/* keyboard selected */
+.react-datepicker .react-datepicker__day--keyboard-selected {
+  @apply bg-gray-50;
+}
+
+/* today */
+.react-datepicker .react-datepicker__day--today {
+  @apply rounded-full border border-muted bg-gray-50 leading-[26px] text-gray-900;
+  @apply hover:border-gray-600 hover:bg-gray-50;
+}
+
+/* while selecting */
+.react-datepicker div.react-datepicker__day--in-selecting-range {
+  @apply rounded-full bg-gray-200 text-gray-900;
+}
+
+.react-datepicker div.react-datepicker__year-text--in-selecting-range {
+  @apply bg-gray-200 text-gray-900;
+}
+
+.react-datepicker
+  div.react-datepicker__year-text--in-selecting-range.react-datepicker__year-text--disabled {
+  @apply bg-transparent text-muted;
+}
+
+/* in range */
+.react-datepicker .react-datepicker__day--in-range {
+  @apply rounded-full bg-gray-200 text-gray-900;
+}
+
+.react-datepicker .react-datepicker__year-text--in-range {
+  @apply bg-gray-200 text-gray-900;
+}
+
+/* selected */
+.react-datepicker .react-datepicker__day--range-start,
+.react-datepicker .react-datepicker__day--range-end,
+.react-datepicker .react-datepicker__day--selected {
+  @apply rounded-full border-none bg-gray-900 font-normal leading-7 text-gray-50;
+  @apply hover:bg-gray-900/80 hover:text-gray-50;
+}
+
+.react-datepicker .react-datepicker__year-text--range-end {
+  @apply border-none bg-gray-900 font-normal text-gray-50 hover:bg-gray-900/80 hover:text-gray-50;
+}
+
+/* time list */
+.react-datepicker .react-datepicker__time-list {
+  @apply !h-[247px];
+}
+
+/* time item */
+.react-datepicker .react-datepicker__time-list-item {
+  @apply my-2 rounded text-sm text-gray-500;
+  @apply hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* selected time item */
+.react-datepicker .react-datepicker__time-list-item--selected {
+  @apply !bg-gray-100 !font-medium !text-gray-900;
+}
+
+/* time only box */
+.react-datepicker-popper .react-datepicker-time__header {
+  @apply text-gray-700;
+}
+.react-datepicker-popper
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box {
+  width: 90px;
+}
+.react-datepicker--time-only
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box {
+  @apply w-auto;
+}
+
+/* time only item */
+.react-datepicker--time-only .react-datepicker__time-list-item {
+  @apply rounded-none;
+}
+
+/* month picker text */
+.react-datepicker .react-datepicker__month-text {
+  @apply w-0 px-5 py-1.5;
+}
+
+/* keyboard selected month in month picker */
+.react-datepicker .react-datepicker__month-text--keyboard-selected {
+  @apply bg-gray-100 text-gray-900;
+}
+
+/* month in range */
+.react-datepicker .react-datepicker__month--in-range {
+  @apply bg-gray-200 text-gray-700;
+}
+
+/* hover on selected months in range */
+.react-datepicker .react-datepicker__month-text.react-datepicker__month--in-range:hover {
+  @apply bg-gray-200 text-gray-900;
+}
+
+/* selected month in range */
+.react-datepicker .react-datepicker__month--range-start,
+.react-datepicker .react-datepicker__month--range-end,
+.react-datepicker .react-datepicker__month--selected {
+  @apply bg-gray-900 font-normal text-gray-50;
+}
+
+/* hover on selected range start and end month */
+.react-datepicker .react-datepicker__month-text.react-datepicker__month--selected:hover,
+.react-datepicker .react-datepicker__month-text.react-datepicker__month--range-start:hover,
+.react-datepicker .react-datepicker__month-text.react-datepicker__month--range-end:hover {
+  @apply bg-gray-900/80 text-gray-50;
+}
+
+/* year wrapper in year picker */
+.react-datepicker .react-datepicker__year-wrapper {
+  @apply inline-block max-w-[220px];
+}
+
+/* year text in year picker */
+.react-datepicker .react-datepicker__year-text {
+  @apply w-auto px-5 py-1.5 text-gray-600 dark:hover:text-gray-100;
+}
+
+.react-datepicker .react-datepicker__year-text--range-end {
+  @apply text-gray-50;
+}
+
+/* keyboard selected year in year picker */
+.react-datepicker .react-datepicker__year-text--keyboard-selected {
+  @apply bg-gray-200 text-gray-900;
+  @apply hover:bg-muted hover:text-gray-900;
+}
+
+/* selected year & month in year picker */
+.react-datepicker .react-datepicker__year-text.react-datepicker__year-text--selected,
+.react-datepicker .react-datepicker__month-text.react-datepicker__month-text--selected {
+  @apply bg-gray-900 text-gray-50;
+  @apply hover:bg-gray-900/80 hover:text-gray-50;
+}
+
+/* year and month dropdown arrow */
+.react-datepicker .react-datepicker__year-read-view--down-arrow,
+.react-datepicker .react-datepicker__month-read-view--down-arrow {
+  @apply top-[5px] h-[7px] w-[7px] border-r-[1.5px] border-t-[1.5px] border-muted;
+}
+
+/* sub-header containing year and month dropdown */
+.react-datepicker
+  .react-datepicker__current-month--hasYearDropdown.react-datepicker__current-month--hasMonthDropdown
+  ~ .react-datepicker__header__dropdown {
+  @apply my-2 grid grid-cols-2 divide-x divide-muted text-sm;
+}
+
+/* month and year dropdown button in sub-header */
+.react-datepicker .react-datepicker__month-dropdown-container--scroll,
+.react-datepicker .react-datepicker__year-dropdown-container--scroll {
+  @apply inline-flex justify-center;
+}
+
+/* month and year dropdown */
+.react-datepicker .react-datepicker__year-dropdown,
+.react-datepicker .react-datepicker__month-dropdown {
+  @apply top-auto w-2/5 border border-gray-100 bg-gray-50 shadow-md;
+}
+
+/* year dropdown */
+.react-datepicker .react-datepicker__year-dropdown {
+  @apply h-80;
+}
+
+/* month dropdown */
+.react-datepicker .react-datepicker__month-dropdown {
+  @apply py-3;
+}
+
+/* month and year option */
+.react-datepicker .react-datepicker__month-option,
+.react-datepicker .react-datepicker__year-option {
+  @apply my-1 py-1 text-sm text-gray-600;
+  @apply hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* first and last type of month and year option */
+.react-datepicker .react-datepicker__month-option:first-of-type,
+.react-datepicker .react-datepicker__month-option:last-of-type,
+.react-datepicker .react-datepicker__year-option:first-of-type,
+.react-datepicker .react-datepicker__year-option:last-of-type {
+  @apply rounded-none;
+}
+
+/* selected month and year in dropdown */
+.react-datepicker .react-datepicker__month-option--selected_month,
+.react-datepicker .react-datepicker__year-option--selected_year {
+  @apply bg-gray-200 text-gray-900;
+  @apply [&>span]:hidden;
+}
+.react-datepicker .react-datepicker__day:hover,
+.react-datepicker .react-datepicker__month-text:hover,
+.react-datepicker .react-datepicker__quarter-text:hover,
+.react-datepicker .react-datepicker__year-text:hover {
+  @apply bg-gray-200 text-gray-900;
+}
+
+/* disabled item */
+.react-datepicker .react-datepicker__day--disabled {
+  @apply cursor-not-allowed text-muted hover:bg-transparent hover:text-muted dark:hover:text-muted;
+}
+
+.react-datepicker .react-datepicker__year-text--disabled {
+  @apply cursor-not-allowed text-muted hover:bg-transparent dark:hover:text-muted;
+}
+
+.custom-input-date::-webkit-calendar-picker-indicator {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+.custom-input-date-1::-webkit-calendar-picker-indicator {
+  background-image: url(./images/icon/icon-calendar.svg);
+}
+.custom-input-date-2::-webkit-calendar-picker-indicator {
+  background-image: url(./images/icon/icon-arrow-down.svg);
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+.mapboxgl-popup-close-button {
+  padding-top: 2px;
+  padding-right: 6px;
+  font-size: large;
+  font-family: 'Satoshi';
+  font-weight: bold;
+}
+
+.mapboxgl-popup-content {
+  padding-right: 30px !important;
+  padding-bottom: 10px !important;
+}
