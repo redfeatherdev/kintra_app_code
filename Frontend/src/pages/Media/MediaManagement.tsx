@@ -46,84 +46,84 @@ const MediaManagement = () => {
   const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null);
 
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-const [banner, setBanner] = useState<Banner | null>(null);
+  const [banner, setBanner] = useState<Banner | null>(null);
 
-useEffect(() => {
-  
-  fetchActiveBlogs();
-  fetchActiveBanner();
-}, []);
+  useEffect(() => {
 
-
-const fetchActiveBlogs = async () => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/blog/active`);
-    const text = await res.text();  // TEMP: inspect raw response
-    console.log('Raw response:', text);
-    const data = JSON.parse(text); // will fail if HTML
-    //const data = await res.json();
-    setBlogPosts(data);
-  } catch (err) {
-    console.error('Error fetching blogs:', err);
-  }
-};
-
-const fetchActiveBanner = async () => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/banner/active`);
-    const data = await res.json();
-    setBanner(data?.url ? data : null);
-  } catch (err) {
-    console.error('Error fetching banner:', err);
-  }
-};
+    fetchActiveBlogs();
+    fetchActiveBanner();
+  }, []);
 
 
-const deleteBlog = async (id: string) => {
-  if (!confirm('Are you sure you want to delete this blog post?')) return;
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/blog/delete/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Delete failed');
+  const fetchActiveBlogs = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/v1/blog/active`);
+      const text = await res.text();  // TEMP: inspect raw response
+      console.log('Raw response:', text);
+      const data = JSON.parse(text); // will fail if HTML
+      //const data = await res.json();
+      setBlogPosts(data);
+    } catch (err) {
+      console.error('Error fetching blogs:', err);
     }
+  };
 
-    const result = await response.json();
-    showNotification('success', result.message || 'Blog post deleted');
-    await fetchActiveBlogs();
-  } catch (error) {
-    console.error('Error deleting blog:', error);
-    showNotification('error', error instanceof Error ? error.message : 'Failed to delete blog');
-  }
-};
-
-
-const deleteBanner = async () => {
-  
-  if (!confirm('Are you sure you want to delete the banner?')) return;
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/banner/delete`, {
-      method: 'DELETE',
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Delete failed');
+  const fetchActiveBanner = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/v1/banner/active`);
+      const data = await res.json();
+      setBanner(data?.url ? data : null);
+    } catch (err) {
+      console.error('Error fetching banner:', err);
     }
+  };
 
-    const result = await response.json();
-    showNotification('success', result.message || 'Banner deleted');
-    await fetchActiveBanner();
-  } catch (error) {
-    console.error('Error deleting banner:', error);
-    showNotification('error', error instanceof Error ? error.message : 'Failed to delete banner');
-  }
-};
+
+  const deleteBlog = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this blog post?')) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/blog/delete/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Delete failed');
+      }
+
+      const result = await response.json();
+      showNotification('success', result.message || 'Blog post deleted');
+      await fetchActiveBlogs();
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+      showNotification('error', error instanceof Error ? error.message : 'Failed to delete blog');
+    }
+  };
+
+
+  const deleteBanner = async () => {
+
+    if (!confirm('Are you sure you want to delete the banner?')) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/banner/delete`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Delete failed');
+      }
+
+      const result = await response.json();
+      showNotification('success', result.message || 'Banner deleted');
+      await fetchActiveBanner();
+    } catch (error) {
+      console.error('Error deleting banner:', error);
+      showNotification('error', error instanceof Error ? error.message : 'Failed to delete banner');
+    }
+  };
 
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const deleteBanner = async () => {
       showNotification('error', 'Please select a file');
       return;
     }
-    
+
     setIsUploading(true);
     try {
       const formData = new FormData();
@@ -181,16 +181,16 @@ const deleteBanner = async () => {
 
       const result = await response.json();
       showNotification('success', result.message || 'Media uploaded successfully!');
-      
+
       // Refresh media list and reset form
       await fetchMedia();
       setFile(null);
       setCaption('');
-      
+
       // Reset file input
       const fileInput = document.getElementById('media-upload') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
-      
+
     } catch (error) {
       console.error('Error uploading media:', error);
       showNotification('error', error instanceof Error ? error.message : 'Failed to upload media');
@@ -204,7 +204,7 @@ const deleteBanner = async () => {
       showNotification('error', 'Please enter blog content');
       return;
     }
-    
+
     setIsBlogUploading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/upload/blog`, {
@@ -225,11 +225,11 @@ const deleteBanner = async () => {
 
       const result = await response.json();
       showNotification('success', result.message || 'Blog post uploaded successfully!');
-      
+
       // Reset form
       setBlogTitle('');
       setBlogContent('');
-      
+
     } catch (error) {
       console.error('Error uploading blog:', error);
       showNotification('error', error instanceof Error ? error.message : 'Failed to upload blog post');
@@ -243,7 +243,7 @@ const deleteBanner = async () => {
       showNotification('error', 'Please select a banner image');
       return;
     }
-    
+
     setIsBannerUploading(true);
     try {
       const formData = new FormData();
@@ -261,14 +261,14 @@ const deleteBanner = async () => {
 
       const result = await response.json();
       showNotification('success', result.message || 'Promotional banner uploaded successfully!');
-      
+
       // Reset form
       setBannerFile(null);
-      
+
       // Reset file input
       const fileInput = document.getElementById('banner-upload') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
-      
+
     } catch (error) {
       console.error('Error uploading banner:', error);
       showNotification('error', error instanceof Error ? error.message : 'Failed to upload banner');
@@ -279,7 +279,7 @@ const deleteBanner = async () => {
 
   const deleteMedia = async (id: string) => {
     if (!confirm('Are you sure you want to delete this media?')) return;
-    
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/media/delete/${id}`, {
         method: 'DELETE',
@@ -295,10 +295,10 @@ const deleteBanner = async () => {
 
       const result = await response.json();
       showNotification('success', result.message || 'Media deleted successfully');
-      
+
       // Refresh media list
       await fetchMedia();
-      
+
     } catch (error) {
       console.error('Error deleting media:', error);
       showNotification('error', error instanceof Error ? error.message : 'Failed to delete media');
@@ -316,9 +316,8 @@ const deleteBanner = async () => {
 
         {/* Notification */}
         {notification && (
-          <div className={`mb-6 p-4 rounded-lg flex items-center space-x-2 ${
-            notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-          }`}>
+          <div className={`mb-6 p-4 rounded-lg flex items-center space-x-2 ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+            }`}>
             {notification.type === 'success' ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
             <span>{notification.message}</span>
           </div>
@@ -331,13 +330,13 @@ const deleteBanner = async () => {
               <Image className="w-6 h-6 text-blue-600" />
               <h2 className="text-xl font-semibold text-gray-900">Upload Media</h2>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Media Type
                 </label>
-                <select 
+                <select
                   value={mediaType}
                   onChange={(e) => setMediaType(e.target.value as 'image' | 'video')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -352,8 +351,8 @@ const deleteBanner = async () => {
                   {mediaType === 'image' ? 'Image' : 'Video'} File
                 </label>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
-                  <input 
-                    type="file" 
+                  <input
+                    type="file"
                     accept={mediaType === 'image' ? 'image/*' : 'video/*'}
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                     className="hidden"
@@ -397,7 +396,7 @@ const deleteBanner = async () => {
               <FileText className="w-6 h-6 text-green-600" />
               <h2 className="text-xl font-semibold text-gray-900">Create Blog Post</h2>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -442,15 +441,15 @@ const deleteBanner = async () => {
             <Image className="w-6 h-6 text-purple-600" />
             <h2 className="text-xl font-semibold text-gray-900">Promotional Banner</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Banner Image
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-purple-400 transition-colors">
-                <input 
-                  type="file" 
+                <input
+                  type="file"
                   accept="image/*"
                   onChange={(e) => setBannerFile(e.target.files?.[0] || null)}
                   className="hidden"
@@ -464,7 +463,7 @@ const deleteBanner = async () => {
                 </label>
               </div>
             </div>
-            
+
             <div className="flex items-end">
               <button
                 onClick={uploadBanner}
@@ -488,7 +487,7 @@ const deleteBanner = async () => {
               {mediaList.length} posts
             </span>
           </div>
-          
+
           {mediaList.length === 0 ? (
             <div className="text-center py-12">
               <Image className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -500,35 +499,34 @@ const deleteBanner = async () => {
                 <div key={media.id} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                   <div className="aspect-video bg-gray-100 flex items-center justify-center">
                     {media.type === 'image' ? (
-                      <img 
-                        src={media.url} 
-                        alt={media.caption} 
+                      <img
+                        src={media.url}
+                        alt={media.caption}
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <video 
-                        src={media.url} 
-                        controls 
+                      <video
+                        src={media.url}
+                        controls
                         className="w-full h-full object-cover"
                         preload="metadata"
                       />
                     )}
                   </div>
-                  
+
                   <div className="p-4">
                     <p className="text-sm text-gray-800 mb-3 line-clamp-2">
                       {media.caption}
                     </p>
-                    
+
                     <div className="flex items-center justify-between">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        media.type === 'image' 
-                          ? 'bg-blue-100 text-blue-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${media.type === 'image'
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-red-100 text-red-800'
+                        }`}>
                         {media.type === 'image' ? 'Image' : 'Video'}
                       </span>
-                      
+
                       <button
                         onClick={() => deleteMedia(media.id)}
                         className="text-red-600 hover:text-red-800 p-1 rounded-md hover:bg-red-50 transition-colors"
@@ -543,28 +541,28 @@ const deleteBanner = async () => {
             </div>
           )}
         </div>
-        
+
         <div className="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Active Blog Posts</h2>
           {blogPosts.length === 0 ? (
             <p className="text-gray-500">No blog posts yet.</p>
           ) : (
             <ul className="space-y-4">
-            {blogPosts.map((blog) => (
-              <li key={blog.id} className="border border-gray-100 rounded p-4 shadow-sm hover:shadow-md transition">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold text-gray-800">{blog.title}</h3>
-                  <button
-                    onClick={() => deleteBlog(blog.id)}
-                    className="text-red-600 hover:text-red-800 p-1 rounded-md hover:bg-red-50 transition-colors"
-                    title="Delete blog"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-                <p className="text-gray-700 text-sm">{blog.content.slice(0, 150)}...</p>
-              </li>
-            ))}
+              {blogPosts.map((blog) => (
+                <li key={blog.id} className="border border-gray-100 rounded p-4 shadow-sm hover:shadow-md transition">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-lg font-bold text-gray-800">{blog.title}</h3>
+                    <button
+                      onClick={() => deleteBlog(blog.id)}
+                      className="text-red-600 hover:text-red-800 p-1 rounded-md hover:bg-red-50 transition-colors"
+                      title="Delete blog"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-gray-700 text-sm">{blog.content.slice(0, 150)}...</p>
+                </li>
+              ))}
             </ul>
           )}
         </div>
@@ -584,7 +582,7 @@ const deleteBanner = async () => {
             <img src={banner.url} alt="Promotional Banner" className="w-full rounded-md border border-gray-100 shadow" />
           </div>
         )}
-        
+
       </div>
     </div>
   );

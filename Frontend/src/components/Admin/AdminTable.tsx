@@ -60,7 +60,7 @@ const AdminTable = ({ fetchData }: { fetchData: () => void }) => {
                 <td>
                   <div className="flex justify-end items-center gap-1.5">
                     <Button
-                      disabled={admin.email === 'kintr.admin@gmail.com'}
+                      disabled={admin?.email === 'kintr.admin@gmail.com'}
                       type="button"
                       variant="flat"
                       color="danger"
@@ -78,8 +78,8 @@ const AdminTable = ({ fetchData }: { fetchData: () => void }) => {
                     </Button>
                     <DeleteAdminButton
                       disabled={
-                        admin.email === 'kintr.admin@gmail.com' ||
-                        admin.email === user.email
+                        admin?.email === 'kintr.admin@gmail.com' ||
+                        admin?.email === user?.email
                       }
                       id={admin.id}
                       fetchData={fetchData}

@@ -23,13 +23,18 @@ import PaymentsPage from './pages/Events/PaymentsPage';
 import PaymentSuccess from './pages/Events/Success';
 import PaymentCancel from './pages/Events/Cancel';
 import MediaManagement from './pages/Media/MediaManagement';
+import AccountOverview from './pages/AccountOverview';
+import Profile from './pages/Profile';
+import AdminMangement from './pages/AdminManagement';
+import Notifications from './pages/Notifications';
+import Demographics from './pages/Demographics';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Remove the type casting that's causing the error
   const { isAuthenticated, token, logIn, logOut } = useAuthStore();
 
@@ -60,9 +65,9 @@ function App() {
               )
             }
           />
-          
 
-          
+
+
           <Route
             path="/"
             element={
@@ -77,6 +82,11 @@ function App() {
           >
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<AccountOverview />} />
+            <Route path="/users/profile/:id" element={<Profile />} />
+            <Route path="demographics" element={<Demographics />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="admins" element={<AdminMangement />} />
             <Route path="events" element={<EventsPage />} />
             <Route path="events/create" element={<CreateEventPage />} />
             <Route path="events/:eventId/attendees" element={<EventAttendeesPage />} />
@@ -87,15 +97,15 @@ function App() {
             <Route path="/cancel" element={<PaymentCancel />} />
             <Route path="/media" element={<MediaManagement />} />
             <Route
-            path="/admin-support"
-            element={
-              isAuthenticated && isAdmin() ? (
-                <AdminSupportSidebar />
-              ) : (
-                <Navigate to="/auth/signin" replace />
-              )
-            }
-          />
+              path="/admin-support"
+              element={
+                isAuthenticated && isAdmin() ? (
+                  <AdminSupportSidebar />
+                ) : (
+                  <Navigate to="/auth/signin" replace />
+                )
+              }
+            />
           </Route>
         </Routes>
       </Suspense>
