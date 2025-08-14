@@ -38,7 +38,7 @@ export const AdminSupportSidebar: React.FC<AdminSupportSidebarProps> = ({ isOpen
   const [refreshing, setRefreshing] = useState<boolean>(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const API_BASE_URL = 'http://159.89.46.69:5000';
+  const API_BASE_URL = 'http://64.225.53.112:5000';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -682,7 +682,7 @@ export const AdminSupportSidebar: React.FC<AdminSupportSidebarProps> = ({ isOpen
 //   const [sendingMessage, setSendingMessage] = useState<boolean>(false);
   
 //   const messagesEndRef = useRef<HTMLDivElement>(null);
-//   const API_BASE_URL = 'http://159.89.46.69:5000';
+//   const API_BASE_URL = 'http://64.225.53.112:5000';
 
 //   // Auto-scroll to bottom when new messages arrive
 //   const scrollToBottom = () => {

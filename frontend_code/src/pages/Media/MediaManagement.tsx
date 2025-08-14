@@ -27,7 +27,7 @@ type Banner = {
 
 
 // Configure your backend base URL here
-const API_BASE_URL = 'http://159.89.46.69:5000'; // Update this to match your Flask server URL
+const API_BASE_URL = 'http://64.225.53.112:5000'; // Update this to match your Flask server URL
 
 const MediaManagement = () => {
   const [file, setFile] = useState<File | null>(null);

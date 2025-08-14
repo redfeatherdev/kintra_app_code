@@ -32,7 +32,7 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const API_BASE_URL = 'http://159.89.46.69:5000';
+  const API_BASE_URL = 'http://64.225.53.112:5000';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -206,14 +206,14 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
                   <div key={i} className={`flex ${msg.sender_type === 'admin' ? 'justify-start' : 'justify-end'}`}>
                     <div className={`flex items-start gap-2 max-w-[85%] ${msg.sender_type === 'admin' ? 'flex-row' : 'flex-row-reverse'}`}>
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${msg.sender_type === 'admin'
-                          ? 'bg-blue-100 text-blue-600'
-                          : 'bg-gray-100 text-gray-600'
+                        ? 'bg-blue-100 text-blue-600'
+                        : 'bg-gray-100 text-gray-600'
                         }`}>
                         {msg.sender_type === 'admin' ? <Headphones size={14} /> : <User size={14} />}
                       </div>
                       <div className={`p-3 rounded-xl text-sm leading-relaxed ${msg.sender_type === 'admin'
-                          ? 'bg-white border border-gray-200 text-gray-800 rounded-tl-md'
-                          : 'bg-blue-600 text-white rounded-tr-md'
+                        ? 'bg-white border border-gray-200 text-gray-800 rounded-tl-md'
+                        : 'bg-blue-600 text-white rounded-tr-md'
                         }`}>
                         <p className="mb-1">{msg.text}</p>
                         <span className={`text-xs opacity-70 ${msg.sender_type === 'admin' ? 'text-gray-500' : 'text-blue-100'
@@ -308,7 +308,7 @@ export default SupportChatWidget;
 //   const messagesEndRef = useRef<HTMLDivElement>(null);
 //   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-//   const API_BASE_URL = 'http://159.89.46.69:5000';
+//   const API_BASE_URL = 'http://64.225.53.112:5000';
 
 //   const scrollToBottom = () => {
 //     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
