@@ -25,6 +25,12 @@ bucket = storage.bucket()
 from app.api.event import event_bp
 app.register_blueprint(event_bp)
 
+from app.api.payment import payment_bp
+app.register_blueprint(payment_bp)
+
+from app.api.media import media_bp
+app.register_blueprint(media_bp)
+
 from app.api.support import support_bp
 app.register_blueprint(support_bp)
 

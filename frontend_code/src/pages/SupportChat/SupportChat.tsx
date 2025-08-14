@@ -32,7 +32,7 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = 'http://159.89.46.69:5000';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -130,8 +130,8 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 right-6 z-50">
-        <button 
-          onClick={openChat} 
+        <button
+          onClick={openChat}
           className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 p-4 rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative"
         >
           <MessageCircle size={24} className="transition-transform group-hover:scale-110" />
@@ -149,9 +149,8 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
     <div className="fixed bottom-6 right-6 z-50">
       <div
         ref={chatContainerRef}
-        className={`bg-white rounded-xl shadow-2xl border border-gray-200 transition-all duration-300 ${
-          isMinimized ? 'w-80 h-16' : 'w-96 h-[500px]'
-        } flex flex-col overflow-hidden`}
+        className={`bg-white rounded-xl shadow-2xl border border-gray-200 transition-all duration-300 ${isMinimized ? 'w-80 h-16' : 'w-96 h-[500px]'
+          } flex flex-col overflow-hidden`}
       >
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center">
@@ -170,13 +169,13 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
             </div>
           </div>
           <div className="flex gap-1">
-            <button 
+            <button
               onClick={toggleMinimize}
               className="p-1.5 hover:bg-white/20 rounded-md transition-colors"
             >
               <Minimize2 size={16} />
             </button>
-            <button 
+            <button
               onClick={closeChat}
               className="p-1.5 hover:bg-white/20 rounded-md transition-colors"
             >
@@ -206,22 +205,19 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
                 messages.map((msg, i) => (
                   <div key={i} className={`flex ${msg.sender_type === 'admin' ? 'justify-start' : 'justify-end'}`}>
                     <div className={`flex items-start gap-2 max-w-[85%] ${msg.sender_type === 'admin' ? 'flex-row' : 'flex-row-reverse'}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                        msg.sender_type === 'admin' 
-                          ? 'bg-blue-100 text-blue-600' 
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${msg.sender_type === 'admin'
+                          ? 'bg-blue-100 text-blue-600'
                           : 'bg-gray-100 text-gray-600'
-                      }`}>
+                        }`}>
                         {msg.sender_type === 'admin' ? <Headphones size={14} /> : <User size={14} />}
                       </div>
-                      <div className={`p-3 rounded-xl text-sm leading-relaxed ${
-                        msg.sender_type === 'admin' 
-                          ? 'bg-white border border-gray-200 text-gray-800 rounded-tl-md' 
+                      <div className={`p-3 rounded-xl text-sm leading-relaxed ${msg.sender_type === 'admin'
+                          ? 'bg-white border border-gray-200 text-gray-800 rounded-tl-md'
                           : 'bg-blue-600 text-white rounded-tr-md'
-                      }`}>
-                        <p className="mb-1">{msg.text}</p>
-                        <span className={`text-xs opacity-70 ${
-                          msg.sender_type === 'admin' ? 'text-gray-500' : 'text-blue-100'
                         }`}>
+                        <p className="mb-1">{msg.text}</p>
+                        <span className={`text-xs opacity-70 ${msg.sender_type === 'admin' ? 'text-gray-500' : 'text-blue-100'
+                          }`}>
                           {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
@@ -253,7 +249,7 @@ const SupportChatWidget: React.FC<SupportChatProps> = ({ currentUser }) => {
                     style={{ minHeight: '40px', maxHeight: '120px' }}
                   />
                 </div>
-                <button 
+                <button
                   onClick={sendMessage}
                   disabled={!text.trim()}
                   className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white p-2.5 rounded-lg transition-colors duration-200 flex items-center justify-center"
@@ -312,7 +308,7 @@ export default SupportChatWidget;
 //   const messagesEndRef = useRef<HTMLDivElement>(null);
 //   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-//   const API_BASE_URL = 'http://localhost:5000';
+//   const API_BASE_URL = 'http://159.89.46.69:5000';
 
 //   const scrollToBottom = () => {
 //     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

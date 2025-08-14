@@ -8,7 +8,7 @@ from app import realtime_db
 import uuid
 from datetime import datetime, timezone
 
-payment_bp = Blueprint("payment", __name__)
+payment_bp = Blueprint("payment_bp", __name__)
 
 stripe.api_key = ''
 
@@ -48,7 +48,7 @@ def create_booking_document(event_id, name, age, gender, seat_type, amount):
     realtime_db.child("bookings").child(booking_id).set(booking_doc)
     return booking_id
 
-@payment_bp.route("/bookings/initiate", methods=["POST"])
+@payment_bp.route("/api/v1/bookings/initiate", methods=["POST"])
 def initiate_booking():
     # Print when the endpoint is hit
     print("Received request for /bookings/initiate")
@@ -90,7 +90,7 @@ def initiate_booking():
         return jsonify({"detail": f"Error creating booking: {str(e)}"}), 500
 
 
-@payment_bp.route("/create-checkout-session", methods=["POST", "OPTIONS"])
+@payment_bp.route("/api/v1/create-checkout-session", methods=["POST", "OPTIONS"])
 def create_checkout_session():
     if request.method == "OPTIONS":
         return '', 200
@@ -131,7 +131,7 @@ def create_checkout_session():
     except Exception as e:
         return jsonify({"detail": str(e)}), 400
 
-@payment_bp.route("/create-payment-intent", methods=["POST"])
+@payment_bp.route("/api/v1/create-payment-intent", methods=["POST"])
 def create_payment_intent():
     data = request.json
     amount = data.get("amount")
@@ -150,7 +150,7 @@ def create_payment_intent():
         return jsonify({"detail": str(e)}), 400
 
 
-@payment_bp.route("/webhook", methods=["POST"])
+@payment_bp.route("/api/v1/webhook", methods=["POST"])
 def stripe_webhook():
     print("Webhook received from Stripe")
 
@@ -233,7 +233,7 @@ def stripe_webhook():
     return jsonify({"status": "success"})
 
 
-@payment_bp.route("/bookings", methods=["GET"])
+@payment_bp.route("/api/v1/bookings", methods=["GET"])
 def get_all_bookings():
     try:
         bookings_snapshot = realtime_db.child("bookings").get()
@@ -246,7 +246,7 @@ def get_all_bookings():
         return jsonify({"detail": f"Error fetching bookings: {str(e)}"}), 500
 
 
-@payment_bp.route("/payments", methods=["GET"])
+@payment_bp.route("/api/v1/payments", methods=["GET"])
 def get_all_payments():
     try:
         payments_snapshot = realtime_db.child("payments").get()
@@ -259,7 +259,7 @@ def get_all_payments():
         return jsonify({"detail": f"Error fetching payments: {str(e)}"}), 500
 
 
-@payment_bp.route("/bookings/<string:booking_id>", methods=["DELETE"])
+@payment_bp.route("/api/v1/bookings/<string:booking_id>", methods=["DELETE"])
 def delete_booking(booking_id):
     try:
         booking_ref = realtime_db.child("bookings").child(booking_id)
@@ -273,7 +273,7 @@ def delete_booking(booking_id):
         return jsonify({"detail": f"Error deleting booking: {str(e)}"}), 500
 
 
-@payment_bp.route("/payments/<string:payment_id>", methods=["DELETE"])
+@payment_bp.route("/api/v1/payments/<string:payment_id>", methods=["DELETE"])
 def delete_payment(payment_id):
     try:
         payment_ref = realtime_db.child("payments").child(payment_id)
@@ -287,7 +287,7 @@ def delete_payment(payment_id):
         return jsonify({"detail": f"Error deleting payment: {str(e)}"}), 500
 
 
-@payment_bp.route("/bookings/clear", methods=["DELETE"])
+@payment_bp.route("/api/v1/bookings/clear", methods=["DELETE"])
 def clear_all_bookings():
     try:
         bookings_snapshot = realtime_db.child("bookings").get()
@@ -301,7 +301,7 @@ def clear_all_bookings():
         print(f"Error clearing bookings: {str(e)}")
         return jsonify({"detail": f"Error clearing bookings: {str(e)}"}), 500
 
-@payment_bp.route("/payments/clear", methods=["DELETE"])
+@payment_bp.route("/api/v1/payments/clear", methods=["DELETE"])
 def clear_all_payments():
     try:
         payments_snapshot = realtime_db.child("payments").get()
